@@ -1,13 +1,20 @@
 import type { InferGetStaticPropsType } from 'next'
+import Head from 'next/head'
 import { GetStaticPaths, GetStaticPropsContext } from 'next/types'
 import { Article, BlogPostImage } from '@components/Article'
 import type { Post } from '../index'
 
 const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { title, body } = post
+
   return (
     <Article>
-      <h1>{post.title}</h1>
-      <p>{post.body}</p>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+      </Head>
+      <h1>{title}</h1>
+      <p>{body}</p>
     </Article>
   )
 }
@@ -20,8 +27,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = posts.map((post) => ({
     params: { id: post.id.toString() }
   }))
-
-  console.log('빌드 패스!', paths)
 
   return {
     paths,
