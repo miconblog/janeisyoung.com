@@ -1,6 +1,6 @@
 import type { InferGetStaticPropsType } from 'next'
 import { GetStaticPaths, GetStaticPropsContext } from 'next/types'
-import { Article } from '@components/Article'
+import { Article, BlogPostImage } from '@components/Article'
 import type { Post } from '../index'
 
 const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {

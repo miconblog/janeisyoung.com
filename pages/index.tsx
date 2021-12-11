@@ -2,6 +2,7 @@ import type { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 
 const Container = styled.div`
   padding: 0 2rem;
@@ -70,12 +71,17 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <BlogTitle>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </BlogTitle>
+        <Link href="/about">
+          <a>About this bl og</a>
+        </Link>
 
         <List>
           {posts.map((post) => (
-            <ListItem key={post.id}>
-              <PostTitle>{post.title}</PostTitle>
-            </ListItem>
+            <Link key={post.id} href="/posts/[id]" as={`/posts/${post.id}`}>
+              <ListItem>
+                <PostTitle>{post.title}</PostTitle>
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Main>
